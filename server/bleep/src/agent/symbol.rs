@@ -180,7 +180,7 @@ impl Agent {
         let response = match self
             .llm_gateway
             .clone()
-            .model("gpt-4-0613")
+            .model("gpt-4o-mini")
             .temperature(0.0)
             .max_tokens(5)
             .chat(&messages, None)

@@ -307,7 +307,7 @@ impl Agent {
                 let answer = match e.answer() {
                     // NB: We intentionally discard the summary as it is redundant.
                     Some(answer) => {
-                        let encoded = transcoder::encode_summarized(answer, "gpt-3.5-turbo")?;
+                        let encoded = transcoder::encode_summarized(answer, "gpt-4o-mini")?;
                         Some(api::Message::function_return("none", &encoded))
                     }
 

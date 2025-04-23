@@ -932,7 +932,7 @@ Bar.
 
 ";
 
-        let encoded = encode_summarized(input, "gpt-4-0613").unwrap();
+        let encoded = encode_summarized(input, "gpt-4o-mini").unwrap();
 
         assert_eq!(expected, encoded);
     }
@@ -979,7 +979,7 @@ quux";
 
     #[test]
     fn test_limit_tokens() {
-        let bpe = tiktoken_rs::get_bpe_from_model("gpt-3.5-turbo").unwrap();
+        let bpe = tiktoken_rs::get_bpe_from_model("gpt-4o-mini").unwrap();
         assert_eq!(limit_tokens("fn 🚨() {}", bpe.clone(), 1), "fn");
 
         // Note: the following calls return a string that does not split the emoji, despite the

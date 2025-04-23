@@ -140,7 +140,7 @@ impl Agent {
         let response = self
             .llm_gateway
             .clone()
-            .model("gpt-3.5-turbo-0613")
+            .model("gpt-4o-mini")
             .temperature(0.0)
             .chat(&prompt, None)
             .await?;

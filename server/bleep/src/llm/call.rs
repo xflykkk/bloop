@@ -87,7 +87,7 @@ pub async fn llm_call(
 
     let model = match req.model.as_deref() {
         Some(model) => model.to_owned(),
-        None => "gpt-4o".into(),
+        None => "gpt-4o-mini".into(),
     };
     //filter out Null values from messages
 

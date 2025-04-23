@@ -202,7 +202,7 @@ impl Agent {
                 });
 
                 let conclusion = e.answer().map(|answer| {
-                    let encoded = transcoder::encode_summarized(answer, "gpt-4-0613").unwrap();
+                    let encoded = transcoder::encode_summarized(answer, "gpt-4o-mini").unwrap();
 
                     llm::client::api::Message::PlainText {
                         role: "assistant".to_owned(),

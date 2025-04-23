@@ -60,7 +60,7 @@
         "entitlements": null,
         "exceptionDomain": "",
         "frameworks": [
-          "frameworks/libonnxruntime.dylib"
+          "/Users/zhuxiaofeng/model/onnxruntime/lib/libonnxruntime.dylib"
         ],
         "providerShortName": null,
         "signingIdentity": null

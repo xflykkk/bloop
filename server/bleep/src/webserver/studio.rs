@@ -31,7 +31,7 @@ use crate::{
 
 mod diff;
 
-const LLM_GATEWAY_MODEL: &str = "gpt-4-turbo";
+const LLM_GATEWAY_MODEL: &str = "gpt-4o-mini";
 
 fn studio_not_found() -> Error {
     Error::not_found("unknown code studio ID")
@@ -491,7 +491,7 @@ async fn token_counts(
         })
         .collect::<Vec<_>>();
 
-    let core_bpe = tiktoken_rs::get_bpe_from_model("gpt-4-turbo").unwrap();
+    let core_bpe = tiktoken_rs::get_bpe_from_model("gpt-4o-mini").unwrap();
     let per_doc_file = stream::iter(doc_context)
         .map(|file| async {
             if file.hidden {
@@ -652,14 +652,14 @@ pub async fn get_doc_file_token_count(
         .map(|sr| sr.text)
         .collect::<String>();
 
-    let core_bpe = tiktoken_rs::get_bpe_from_model("gpt-4-turbo").unwrap();
+    let core_bpe = tiktoken_rs::get_bpe_from_model("gpt-4o-mini").unwrap();
     let token_count = core_bpe.encode_ordinary(&content).len();
 
     Ok(Json(token_count))
 }
 
 fn count_tokens_for_file(path: &str, body: &str, ranges: &[Range<usize>]) -> usize {
-    let core_bpe = tiktoken_rs::get_bpe_from_model("gpt-4-turbo").unwrap();
+    let core_bpe = tiktoken_rs::get_bpe_from_model("gpt-4o-mini").unwrap();
 
     let mut chunks = Vec::new();
 
@@ -1379,7 +1379,7 @@ async fn populate_studio_name(
         .llm_gateway(&app)
         .await
         .map_err(|e| Error::user(e).with_status(StatusCode::UNAUTHORIZED))?
-        .model("gpt-3.5-turbo-16k-0613")
+        .model("gpt-4o-mini")
         .temperature(0.0);
 
     let messages = &[llm::client::api::Message::system(

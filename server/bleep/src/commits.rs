@@ -336,13 +336,13 @@ async fn generate_question(
 }
 
 async fn classify_commit(llm_gateway: &llm::client::Client, commit: &DiffStat) -> Result<bool> {
-    let bpe = tiktoken_rs::get_bpe_from_model("gpt-3.5-turbo-0613").unwrap();
+    let bpe = tiktoken_rs::get_bpe_from_model("gpt-4o-mini").unwrap();
     let raw_commit = format!("{}\n\n{}", commit.commit_message, commit.diff);
     let commit_msg = crate::agent::transcoder::limit_tokens(&raw_commit, bpe, 3000);
 
     let response = llm_gateway
         .clone()
-        .model("gpt-3.5-turbo-0613")
+        .model("gpt-4o-mini")
         .max_tokens(1)
         .chat(
             &[
@@ -366,13 +366,13 @@ Example output: 2",
 }
 
 async fn get_question(llm_gateway: &llm::client::Client, commit: &DiffStat) -> Result<String> {
-    let bpe = tiktoken_rs::get_bpe_from_model("gpt-4-0613").unwrap();
+    let bpe = tiktoken_rs::get_bpe_from_model("gpt-4o-mini").unwrap();
     let raw_commit = format!("{}\n\n{}", commit.commit_message, commit.diff);
     let commit = crate::agent::transcoder::limit_tokens(&raw_commit, bpe, 7000);
 
     llm_gateway
         .clone()
-        .model("gpt-4-0613")
+        .model("gpt-4o-mini")
         .max_tokens(64)
         .chat(
             &[
@@ -402,11 +402,11 @@ If you cannot write a good question, simply reply: 0"#,
 }
 
 async fn get_tag(llm_gateway: &llm::client::Client, question: &str) -> Result<String> {
-    let bpe = tiktoken_rs::get_bpe_from_model("gpt-3.5-turbo-0613").unwrap();
+    let bpe = tiktoken_rs::get_bpe_from_model("gpt-4o-mini").unwrap();
     let question = crate::agent::transcoder::limit_tokens(question, bpe, 7168);
     llm_gateway
         .clone()
-        .model("gpt-3.5-turbo-0613")
+        .model("gpt-4o-mini")
         .max_tokens(6)
         .chat(
             &[
